@@ -10,12 +10,15 @@ geoip_url="https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-C
 filename="GeoLite2-Country-CSV.zip"
 country = "2264397"  #portugal
 
+# do not change from here
 
+## get geoip from database
 req = requests.get(geoip_url)
 with open(filename,'wb') as output_file:
     output_file.write(req.content)
 print('Downloading Completed')
 
+## extract csv from zip
 name1=""
 import zipfile
 with zipfile.ZipFile(filename, 'r') as zip_ref:
@@ -24,7 +27,8 @@ with zipfile.ZipFile(filename, 'r') as zip_ref:
             zip_ref.extract(name1)
             print(name1)
             break
-
+            
+## build array with all ip ranges from coutry
 c=[]
 with open(name1, mode ='r') as file:
     csvFile = csv.reader(file)
@@ -32,8 +36,9 @@ with open(name1, mode ='r') as file:
         if line[1] == country:
             #print(line[1])
             c.append(line)
+            
+## save array in file as json 
 cj = json.dumps(c)
-
 file = open(country + ".json.txt", "w")
 file.write(cj)
 file.close
