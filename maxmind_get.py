@@ -2,6 +2,9 @@ import requests
 import csv
 import json
 
+#how to get an API KEY:
+#https://blog.maxmind.com/2021/01/integrating-maxminds-free-and-paid-ip-geolocation-web-services-in-php?lang=en
+
 key="PUT-YOUR-KEY-HERE"
 geoip_url="https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country-CSV&license_key=" + key + "&suffix=zip"
 filename="GeoLite2-Country-CSV.zip"
